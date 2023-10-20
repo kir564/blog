@@ -1,5 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Icon } from '../../../../components';
+import { useDispatch, useSelector } from 'react-redux';
+import { Icon, Button } from '../../../../components';
+import {
+  selectUserLogin,
+  selectUserRole,
+  selectUserSession,
+  selectUser,
+} from '../../../../selectors';
+import { logoutAction } from '../../../../actions';
+import { ROLE } from '../../../../constans';
+
 import styled from 'styled-components';
 
 const RightAligned = styled.div`
@@ -7,25 +17,44 @@ const RightAligned = styled.div`
   gap: 10px;
 `;
 
-const Button = styled(Link)`
-  text-decoration: none;
-  color: #000;
-  background-color: #eee;
-  border: 1px solid #000;
-  border-radius: 5px;
-  padding: 0 10px;
+const Login = styled.div`
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 const ControlPanelContainer = ({ className }) => {
+  const roleId = useSelector(selectUserRole);
+  const login = useSelector(selectUserLogin);
+  const session = useSelector(selectUserSession);
+  // const { roleId, login, session } = useSelector(selectUser);
+  const dispath = useDispatch();
   const navigate = useNavigate();
+
   const goPrevPage = () => {
     navigate(-1);
   };
+
+  const logout = () => {
+    dispath(logoutAction(session));
+  };
+
   return (
     <div className={className}>
       <RightAligned>
-        <Button to="/login">Войти</Button>
+        {roleId !== ROLE.GUEST ? (
+          <>
+            <Login>{login}</Login>
+            {/* <Link to="/"> */}
+            <Icon id="fa-sign-out" onClick={logout} />
+            {/* </Link> */}
+          </>
+        ) : (
+          <Button width="auto">
+            <Link to="/login">Войти</Link>
+          </Button>
+        )}
       </RightAligned>
+
       <RightAligned>
         <Icon id="fa-backward" onClick={goPrevPage} />
         <Link to="/post">
