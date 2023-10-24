@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useDispatch, useStore, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { server } from '../../bff';
 import { Input, Button, H2, AuthError, AuthContainer } from '../../components';
-import styled from 'styled-components';
 import { setUserAction } from '../../actions';
 import { selectUserRole } from '../../selectors';
 import { ROLE } from '../../constans';
 import { useResetForm } from '../../hooks';
 import { getErrorMessage } from '../../utils';
 
-const authFormSchema = yup.object().shape({
+const regFormSchema = yup.object().shape({
   login: yup
     .string()
     .required('Заполните логин')
@@ -29,15 +28,13 @@ const authFormSchema = yup.object().shape({
     )
     .min(6, 'Неверно заполнен пароль. Минимум 6 символов')
     .max(30, 'Неверно заполнен пароль. Максимуммум 30 символов'),
+  passcheck: yup
+    .string()
+    .required('Заполните повтор пароля')
+    .oneOf([yup.ref('password'), null], 'Повтор пароля не совпадает'),
 });
 
-const RegistrationLink = styled(Link)`
-  display: inline-block;
-  text-decoration: underline;
-  margin-top: 5px;
-`;
-
-export const Authorization = () => {
+export const Registartion = () => {
   const [serverError, setServerError] = useState(null);
   const dispatch = useDispatch();
   const roleId = useSelector(selectUserRole);
@@ -51,14 +48,15 @@ export const Authorization = () => {
     defaultValues: {
       login: '',
       password: '',
+      passcheck: '',
     },
-    resolver: yupResolver(authFormSchema),
+    resolver: yupResolver(regFormSchema),
   });
 
   useResetForm(reset);
 
   const onSubmit = ({ login, password }) => {
-    server.autorize(login, password).then(({ error, res }) => {
+    server.register(login, password).then(({ error, res }) => {
       if (error) {
         setServerError(`Ошибка запроса: ${error}`);
         return;
@@ -76,7 +74,7 @@ export const Authorization = () => {
 
   return (
     <AuthContainer>
-      <H2>Авторизация</H2>
+      <H2>Регистрация</H2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           type="text"
@@ -92,11 +90,18 @@ export const Authorization = () => {
             onChange: () => setServerError(null),
           })}
         />
+        <Input
+          type="password"
+          placeholder="Проверка пароля"
+          {...register('passcheck', {
+            onChange: () => setServerError(null),
+          })}
+        />
         <Button type="submit" height="33px" size="18px" disabled={!!formError}>
-          Авторизироваться
+          Зарегистрироваться
         </Button>
         {errorMessage && <AuthError>{errorMessage}</AuthError>}
-        <RegistrationLink to="/register">Регистрация</RegistrationLink>
+        {/* <RegistrationLink to="/register">Регистрация</RegistrationLink> */}
       </form>
     </AuthContainer>
   );

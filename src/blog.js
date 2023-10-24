@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { Header, Footer } from './components';
-import { Authorization } from './pages';
+import { Authorization, Registartion } from './pages';
 import styled from 'styled-components';
 
 const AppColumn = styled.div`
@@ -19,12 +19,18 @@ const Content = styled.div`
   flex-grow: 1;
 `;
 
-const AuthorizationContainer = styled(Authorization)`
+const CenterContainer = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+// const AuthorizationContainer = styled(Authorization)`
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
 function Blog() {
   return (
@@ -33,8 +39,22 @@ function Blog() {
       <Content>
         <Routes>
           <Route path="/" element={<div>Main Page</div>} />
-          <Route path="/login" element={<AuthorizationContainer />} />
-          <Route path="/register" element={<div>Registration Page</div>} />
+          <Route
+            path="/login"
+            element={
+              <CenterContainer>
+                <Authorization />
+              </CenterContainer>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <CenterContainer>
+                <Registartion />
+              </CenterContainer>
+            }
+          />
           <Route path="/users" element={<div>Users Page</div>} />
           <Route path="/post" element={<div>New Article Page</div>} />
           <Route path="/post/:postId" element={<div>Article Page</div>} />
