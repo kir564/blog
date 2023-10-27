@@ -1,4 +1,6 @@
+import { transformUser } from '../transformers';
+
 export const getUser = async (loginToFind) =>
   fetch(`http://localhost:3005/users?login=${loginToFind}`)
     .then((response) => response.json())
-    .then((loadUser) => loadUser[0]);
+    .then(([loadedUser]) => loadedUser && transformUser(loadedUser));

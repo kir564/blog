@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const weatherUrl = new URL('https://api.openweathermap.org/data/2.5/weather');
@@ -27,9 +26,9 @@ const MailInfo = styled.div`
 `;
 
 const FooterContainer = ({ className }) => {
-  const [city, setCity] = useState('Томск');
-  const [temperature, setTemperature] = useState('23');
-  const [icon, setIcon] = useState('03d');
+  // const [city, setCity] = useState('Томск');
+  // const [temperature, setTemperature] = useState('23');
+  // const [icon, setIcon] = useState('03d');
 
   // useEffect(() => {
   //   fetch(weatherUrl)
@@ -50,14 +49,15 @@ const FooterContainer = ({ className }) => {
         <div>web@developer.ru</div>
       </MailInfo>
       <LocationInfo>
-        <div>{city}</div>
+        <div>Томск</div>
         <Weather>
           <img
-            src={` https://openweathermap.org/img/wn/${icon}.png`}
+            src={` https://openweathermap.org/img/wn/03d.png`}
             width="35px"
             height="35px"
+            alt="description weather"
           />
-          {temperature} &#8451;
+          23 &#8451;
         </Weather>
         <div>{new Date().toLocaleDateString()}</div>
       </LocationInfo>

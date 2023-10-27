@@ -1,3 +1,1 @@
-export * from './get-users';
-export * from './bff';
-export * from './sessions';
+export { server } from './server';

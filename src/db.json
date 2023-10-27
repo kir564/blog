@@ -4,32 +4,25 @@
       "id": "001",
       "login": "anton",
       "password": "qwerty123",
-      "registed_at": "2050-09-22",
-      "role_id": "0"
-    },
-    {
-      "login": "kir",
-      "password": "qwerty",
-      "registred_at": "2047-08-07 03:53",
-      "role_id": 2,
-      "id": "US6A4Rt"
+      "registred_at": "2050-09-22 12:00",
+      "role_id": 0
     }
   ],
   "roles": [
     {
-      "id": "0",
+      "id": 0,
       "name": "Администратор"
     },
     {
-      "id": "1",
+      "id": 1,
       "name": "Модератор"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Читатель"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Гость"
     }
   ],

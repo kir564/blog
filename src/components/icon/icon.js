@@ -9,7 +9,10 @@ const IconContainer = ({ className, id, onClick }) => {
 };
 
 export const Icon = styled(IconContainer)`
-  font-size: ${({ size = '20px' }) => size};
-  margin: ${({ margin = '0' }) => margin};
+  font-size: ${({ size }) => size || '20px'};
+  color: ${({ disabled }) => (disabled ? '#ccc' : '')};
+  /* width: ${({ width }) => width || '20px'}; */
+  /* height: ${({ height }) => height || '20px'}; */
+  margin: ${({ margin }) => margin || '0'};
   cursor: pointer;
 `;

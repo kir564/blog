@@ -5,7 +5,6 @@ import {
   selectUserLogin,
   selectUserRole,
   selectUserSession,
-  selectUser,
 } from '../../../../selectors';
 import { logoutAction } from '../../../../actions';
 import { ROLE } from '../../../../constans';
