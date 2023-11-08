@@ -6,7 +6,7 @@ import {
   selectUserRole,
   selectUserSession,
 } from '../../../../selectors';
-import { logoutAction } from '../../../../actions';
+import { logoutAction, REMOVE_POST_ACTION } from '../../../../actions';
 import { ROLE } from '../../../../constans';
 
 import styled from 'styled-components';
@@ -26,7 +26,7 @@ const ControlPanelContainer = ({ className }) => {
   const login = useSelector(selectUserLogin);
   const session = useSelector(selectUserSession);
   // const { roleId, login, session } = useSelector(selectUser);
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const goPrevPage = () => {
@@ -34,7 +34,9 @@ const ControlPanelContainer = ({ className }) => {
   };
 
   const logout = () => {
-    dispath(logoutAction(session));
+    dispatch(logoutAction(session));
+    sessionStorage.removeItem('userData');
+    navigate('/');
   };
 
   return (

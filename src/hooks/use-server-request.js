@@ -8,7 +8,9 @@ export const useServerRequest = () => {
 
   return useCallback(
     (operation, ...params) => {
-      const requestParams = ['register', 'autorize'].includes(operation)
+      const requestParams = ['register', 'autorize', 'fetchPost'].includes(
+        operation
+      )
         ? params
         : [session, ...params];
 

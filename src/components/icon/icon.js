@@ -14,5 +14,5 @@ export const Icon = styled(IconContainer)`
   /* width: ${({ width }) => width || '20px'}; */
   /* height: ${({ height }) => height || '20px'}; */
   margin: ${({ margin }) => margin || '0'};
-  cursor: pointer;
+  cursor: ${({ cursor }) => cursor || 'pointer'};
 `;

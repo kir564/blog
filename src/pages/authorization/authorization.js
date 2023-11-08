@@ -65,6 +65,7 @@ export const Authorization = () => {
       }
 
       dispatch(setUserAction(res));
+      sessionStorage.setItem('userData', JSON.stringify(res));
     });
   };
 
