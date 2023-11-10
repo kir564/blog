@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { Header, Footer, Modal } from './components';
-import { Authorization, Registartion, Users, Post } from './pages';
+import { Authorization, Registartion, Users, Post, Main } from './pages';
 import { setUserAction } from './actions';
 import styled from 'styled-components';
 import { sessions } from './bff/sessions';
@@ -56,7 +56,7 @@ function Blog() {
       <Header />
       <Pages>
         <Routes>
-          <Route path="/" element={<div>Main Page</div>} />
+          <Route path="/" element={<Main />} />
           <Route
             path="/login"
             element={

@@ -1,7 +1,11 @@
 import { transformComment } from '../transformers';
 
 export const getComments = async (postId) =>
-  fetch(`http://localhost:3005/comments?post_id=${postId}`)
+  fetch(
+    postId
+      ? `http://localhost:3005/comments?post_id=${postId}`
+      : `http://localhost:3005/comments`
+  )
     .then((response) => response.json())
     .then(
       (loadedComments) =>

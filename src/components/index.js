@@ -8,3 +8,5 @@ export * from './auth-error/auth-error';
 export * from './auth-container/auth-container';
 export * from './content/content';
 export * from './modal/modal';
+export * from './post-card/post-card';
+export * from './pagination/pagination';

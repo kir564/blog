@@ -5,6 +5,7 @@ export * from './get-roles';
 export * from './set-user-role';
 export * from './delete-user';
 export * from './get-post';
+export * from './get-posts';
 export * from './add-comment';
 export * from './get-comments';
 export * from './add-session';
