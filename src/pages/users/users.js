@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
-import { H2, Content } from '../../components';
+import { useSelector } from 'react-redux';
+import { H2, PrivateContent } from '../../components';
 import { User, HeaderUsersRow } from '../users/components';
+import { checkAccess } from '../../utils';
 import { useServerRequest } from '../../hooks';
+import { selectUserRole } from '../../selectors';
 import styled from 'styled-components';
 import { ROLE } from '../../bff/constans';
 
@@ -17,10 +20,15 @@ export const Users = () => {
   const [roles, setRoles] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [flagUpdateUsers, setFlagUpdateUsers] = useState(true);
+  const userRole = useSelector(selectUserRole);
 
   const requestServer = useServerRequest();
 
   useEffect(() => {
+    if (!checkAccess([ROLE.ADMIN], userRole)) {
+      return;
+    }
+
     Promise.all([
       requestServer('fetchRoles'),
       requestServer('fetchUsers'),
@@ -42,7 +50,7 @@ export const Users = () => {
 
   return (
     <StyledUsers>
-      <Content error={errorMessage}>
+      <PrivateContent access={[ROLE.ADMIN]} serverError={errorMessage}>
         <H2>Пользователи</H2>
         <HeaderUsersRow>
           <div className="table-elem login">Логин</div>
@@ -59,7 +67,7 @@ export const Users = () => {
             />
           );
         })}
-      </Content>
+      </PrivateContent>
     </StyledUsers>
   );
 };

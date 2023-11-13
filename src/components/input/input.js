@@ -10,6 +10,6 @@ const StyledInput = styled.input`
   height: 33px;
 `;
 
-export const Input = (props) => {
-  return <StyledInput {...props} />;
-};
+export const Input = forwardRef((props, ref) => {
+  return <StyledInput {...props} ref={ref} />;
+});
