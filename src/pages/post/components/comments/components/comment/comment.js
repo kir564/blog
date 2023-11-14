@@ -9,7 +9,12 @@ import {
 } from '../../../../../../actions';
 import { closeModal } from '../../../../../../components/modal/utils/close-modal';
 
-const CommentContainer = ({ className, comment, postId }) => {
+const CommentContainer = ({
+  className,
+  comment,
+  postId,
+  isAdminOrModerator,
+}) => {
   const dispatch = useDispatch();
   const requestServer = useServerRequest();
   const { id, author, publishedAt, content } = comment;
@@ -46,10 +51,12 @@ const CommentContainer = ({ className, comment, postId }) => {
         </div>
         <div className="text">{content}</div>
       </div>
-      <Icon
-        id="fa-trash-o"
-        onClick={() => onRemoveComment(requestServer, id, postId)}
-      ></Icon>
+      {isAdminOrModerator && (
+        <Icon
+          id="fa-trash-o"
+          onClick={() => onRemoveComment(requestServer, id, postId)}
+        ></Icon>
+      )}
     </div>
   );
 };

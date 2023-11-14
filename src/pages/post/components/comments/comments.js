@@ -4,14 +4,24 @@ import { Icon } from '../../../../components';
 import { Comment } from './components';
 import styled from 'styled-components';
 import { useServerRequest } from '../../../../hooks';
-import { selectUser } from '../../../../selectors';
+import { checkAccess } from '../../../../utils';
+import { selectUser, selectUserRole } from '../../../../selectors';
 import { addCommentAsyncAction } from '../../../../actions';
+import { ROLE } from '../../../../bff/constans';
 
 const CommentsContainer = ({ className, comments, postId }) => {
   const [newComment, setNewComment] = useState('');
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const serverRequest = useServerRequest();
+  const roleId = useSelector(selectUserRole);
+
+  const isAccessComments = checkAccess(
+    [ROLE.ADMIN, ROLE.MODERATOR, ROLE.READER],
+    roleId
+  );
+
+  const isAdminOrModerator = checkAccess([ROLE.ADMIN, ROLE.MODERATOR], roleId);
 
   const writeComment = ({ target }) => {
     setNewComment(target.value);
@@ -24,24 +34,31 @@ const CommentsContainer = ({ className, comments, postId }) => {
 
   return (
     <div className={className}>
-      <div className="new-comment">
-        <textarea
-          name="comment"
-          value={newComment}
-          onChange={writeComment}
-          placeholder="Написать комментарий"
-        ></textarea>
-        <Icon
-          id="fa-paper-plane-o"
-          size="18px"
-          onClick={() =>
-            onNewCommentAdd(serverRequest, user, postId, newComment)
-          }
-        />
-      </div>
+      {isAccessComments && (
+        <div className="new-comment">
+          <textarea
+            name="comment"
+            value={newComment}
+            onChange={writeComment}
+            placeholder="Написать комментарий"
+          ></textarea>
+          <Icon
+            id="fa-paper-plane-o"
+            size="18px"
+            onClick={() =>
+              onNewCommentAdd(serverRequest, user, postId, newComment)
+            }
+          />
+        </div>
+      )}
       <div className="comments">
         {comments.map((comment) => (
-          <Comment key={comment.id} comment={comment} postId={postId} />
+          <Comment
+            key={comment.id}
+            comment={comment}
+            postId={postId}
+            isAdminOrModerator={isAdminOrModerator}
+          />
         ))}
       </div>
     </div>

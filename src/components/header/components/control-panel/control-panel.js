@@ -8,6 +8,7 @@ import {
 } from '../../../../selectors';
 import { logoutAction, REMOVE_POST_ACTION } from '../../../../actions';
 import { ROLE } from '../../../../constans';
+import { checkAccess } from '../../../../utils';
 
 import styled from 'styled-components';
 
@@ -36,8 +37,10 @@ const ControlPanelContainer = ({ className }) => {
   const logout = () => {
     dispatch(logoutAction(session));
     sessionStorage.removeItem('userData');
-    navigate('/');
+    // navigate('/');
   };
+
+  const isAdmin = checkAccess([ROLE.ADMIN], roleId);
 
   return (
     <div className={className}>
@@ -58,12 +61,16 @@ const ControlPanelContainer = ({ className }) => {
 
       <RightAligned>
         <Icon id="fa-backward" onClick={goPrevPage} />
-        <Link to="/post">
-          <Icon id="fa-file-text-o" />
-        </Link>
-        <Link to="/users">
-          <Icon id="fa-users" />
-        </Link>
+        {isAdmin && (
+          <>
+            <Link to="/post">
+              <Icon id="fa-file-text-o" />
+            </Link>
+            <Link to="/users">
+              <Icon id="fa-users" />
+            </Link>
+          </>
+        )}
       </RightAligned>
     </div>
   );
