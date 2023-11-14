@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   CLOSE_MODAL_ACTION,
   openModalAction,
@@ -74,3 +75,9 @@ export const SpecialPanel = styled(SpecialPanelContainer)`
     gap: 10px;
   }
 `;
+
+SpecialPanel.propTypes = {
+  publishedAt: PropTypes.string.isRequired,
+  editButton: PropTypes.node.isRequired,
+  postId: PropTypes.string.isRequired,
+};

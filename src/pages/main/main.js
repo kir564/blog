@@ -34,7 +34,7 @@ export const Main = () => {
     requestServer('fetchPosts', page, PAGINATION_LIMIT, searchPhrase).then(
       ({ res }) => {
         setPosts(res.posts);
-        setLastPage(res.countPosts);
+        setLastPage(Number(res.countPosts));
       }
     );
   }, [requestServer, page, searchPhrase]);

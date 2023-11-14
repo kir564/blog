@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 // import { useDispatch } from 'react-redux';
 import { Icon } from '../../../../components';
 // import { saveUserRoleAction } from '../../../../actions';
@@ -7,6 +8,7 @@ import { HeaderUsersRow } from '../header-users-row/header-users-row';
 import styled from 'styled-components';
 // import { server } from '../../../../bff';
 import { useServerRequest } from '../../../../hooks';
+import { PROP_TYPE } from '../../../../constans';
 
 const UserRow = styled.div`
   display: flex;
@@ -74,4 +76,20 @@ export const User = ({ className, user, roles, removeUser }) => {
       </UserRow>
     </>
   );
+};
+
+User.propTypes = {
+  user: PropTypes.shape({
+    login: PropTypes.string.isRequired,
+    registredAt: PropTypes.string.isRequired,
+    roleId: PROP_TYPE.ROLE.isRequired,
+    id: PropTypes.string.isRequired,
+  }),
+  roles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ),
+  removeUser: PropTypes.func,
 };

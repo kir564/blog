@@ -142,13 +142,13 @@
   "sessions": [
     {
       "user": {
-        "id": "sJR7v_5",
-        "login": "kirill",
-        "registredAt": "2055-09-07 08:32",
-        "roleId": 2,
-        "password": "qwerty"
+        "id": "001",
+        "login": "anton",
+        "registredAt": "2050-09-22 12:00",
+        "roleId": 0,
+        "password": "qwerty123"
       },
-      "hash": "0.48767780442450270328436090494506061077117919921875",
+      "hash": "0.60078771259576724261819435923825949430465698242188",
       "id": 1
     }
   ]

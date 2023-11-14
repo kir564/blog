@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '../button/button';
-import { PAGINATION_LIMIT } from '../../constans';
+// import { PAGINATION_LIMIT } from '../../constans';
 
 const Wrapper = styled.div`
   display: flex;
@@ -51,4 +52,10 @@ export const Pagination = ({ setPage, page, lastPage }) => {
       </Button>
     </Wrapper>
   );
+};
+
+Pagination.propTypes = {
+  setPage: PropTypes.func.isRequired,
+  page: PropTypes.PropTypes.number.isRequired,
+  lastPage: PropTypes.PropTypes.number.isRequired,
 };

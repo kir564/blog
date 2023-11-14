@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const HeaderUsersRowContainer = ({ className, children }) => {
@@ -12,3 +13,7 @@ export const HeaderUsersRow = styled(HeaderUsersRowContainer)`
     padding: 0 0 0 10px;
   }
 `;
+
+HeaderUsersRow.propTypes = {
+  children: PropTypes.node,
+};

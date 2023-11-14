@@ -6,7 +6,7 @@ import {
   selectUserRole,
   selectUserSession,
 } from '../../../../selectors';
-import { logoutAction, REMOVE_POST_ACTION } from '../../../../actions';
+import { logoutAction } from '../../../../actions';
 import { ROLE } from '../../../../constans';
 import { checkAccess } from '../../../../utils';
 

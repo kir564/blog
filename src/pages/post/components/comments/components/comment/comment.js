@@ -1,6 +1,8 @@
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Icon } from '../../../../../../components';
+import { PROP_TYPE } from '../../../../../../constans';
 import { useServerRequest } from '../../../../../../hooks';
 import {
   removeCommentAction,
@@ -96,3 +98,9 @@ export const Comment = styled(CommentContainer)`
     gap: 5px;
   }
 `;
+
+Comment.propTypes = {
+  comment: PROP_TYPE.COMMENT,
+  postId: PropTypes.string,
+  isAdminOrModerator: PropTypes.bool,
+};

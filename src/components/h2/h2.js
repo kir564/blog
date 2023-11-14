@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledH2 = styled.h2`
@@ -8,4 +9,8 @@ const StyledH2 = styled.h2`
 
 export const H2 = ({ children, ...props }) => {
   return <StyledH2 {...props}>{children}</StyledH2>;
+};
+
+H2.propTypes = {
+  children: PropTypes.node.isRequired,
 };

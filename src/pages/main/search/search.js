@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { IoSearch } from 'react-icons/io5';
 
@@ -54,4 +55,8 @@ export const Search = ({ setSearchPhrase }) => {
       />
     </SearchContainer>
   );
+};
+
+Search.propTypes = {
+  setSearchPhrase: PropTypes.func.isRequired,
 };
