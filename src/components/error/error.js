@@ -1,4 +1,5 @@
 import React from 'react';
+import PropType from 'prop-types';
 import { PROP_TYPE } from '../../constans';
 import styled from 'styled-components';
 import { H2 } from '../h2/h2';
